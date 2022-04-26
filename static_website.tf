@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "frontend" {
-  bucket =  "glenn-demobucket"
-  acl = "public-read"
+  bucket = var.bucket_name
+  acl    = "public-read"
   policy = <<EOF
 {
   "Id": "bucket_policy_site",
@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "frontend" {
         "s3:GetObject"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::glenn-demobucket/*",
+      "Resource": "arn:aws:s3:::${var.bucket_name}/*",
       "Principal": "*"
     }
   ]
@@ -24,7 +24,5 @@ EOF
   }
 }
 
-variable "bucket_name" {
-  description = "The name of the bucket to create"
-  default = "<<bucket name here>>"
-}
+
+
